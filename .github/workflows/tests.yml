@@ -1,0 +1,91 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          working-directory: packages/hirehq/laravel-bank-holidays
+
+      - name: Run lint
+        working-directory: packages/hirehq/laravel-bank-holidays
+        run: composer lint
+
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - laravel: '^11.0'
+            testbench: '^9.0'
+            php: '8.2'
+          - laravel: '^11.0'
+            testbench: '^9.0'
+            php: '8.3'
+          - laravel: '^11.0'
+            testbench: '^9.0'
+            php: '8.4'
+          - laravel: '^12.0'
+            testbench: '^10.0'
+            php: '8.2'
+          - laravel: '^12.0'
+            testbench: '^10.0'
+            php: '8.3'
+          - laravel: '^12.0'
+            testbench: '^10.0'
+            php: '8.4'
+          - laravel: '^12.0'
+            testbench: '^10.0'
+            php: '8.5'
+          - laravel: '^13.0'
+            testbench: '^11.0'
+            php: '8.3'
+          - laravel: '^13.0'
+            testbench: '^11.0'
+            php: '8.4'
+          - laravel: '^13.0'
+            testbench: '^11.0'
+            php: '8.5'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Update test matrix dependencies
+        working-directory: packages/hirehq/laravel-bank-holidays
+        run: composer require --no-interaction --no-update "illuminate/http:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          dependency-versions: prefer-stable
+          working-directory: packages/hirehq/laravel-bank-holidays
+
+      - name: Run tests
+        working-directory: packages/hirehq/laravel-bank-holidays
+        run: composer test

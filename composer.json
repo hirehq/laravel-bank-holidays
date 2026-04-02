@@ -1,0 +1,66 @@
+{
+    "name": "hirehq/laravel-bank-holidays",
+    "description": "UK bank holiday and working day Carbon macros backed by the GOV.UK bank holiday feed.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "bank holidays",
+        "working days",
+        "carbon",
+        "uk"
+    ],
+    "homepage": "https://github.com/hirehq/laravel-bank-holidays",
+    "authors": [
+        {
+            "name": "Hire HQ Software Ltd",
+            "homepage": "https://github.com/hirehq",
+            "role": "Owner"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/hirehq/laravel-bank-holidays/issues",
+        "email": "security@hirehq.co.uk",
+        "source": "https://github.com/hirehq/laravel-bank-holidays"
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^4.3",
+        "pestphp/pest-plugin": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HireHq\\LaravelBankHolidays\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HireHq\\LaravelBankHolidays\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest --configuration=phpunit.xml.dist",
+        "lint": "vendor/bin/pint --test",
+        "format": "vendor/bin/pint"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HireHq\\LaravelBankHolidays\\BankHolidaysServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
