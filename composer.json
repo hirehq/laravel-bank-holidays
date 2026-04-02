@@ -31,8 +31,8 @@
     "require-dev": {
         "laravel/pint": "^1.24",
         "orchestra/testbench": "^9.0|^10.0|^11.0",
-        "pestphp/pest": "^4.3",
-        "pestphp/pest-plugin": "^4.0"
+        "pestphp/pest": "^3.8",
+        "pestphp/pest-plugin": "^3.0",
         "rector/rector": "^2.3",
         "driftingly/rector-laravel": "^2.2"
     },
