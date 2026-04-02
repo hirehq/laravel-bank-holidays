@@ -71,6 +71,7 @@ From the package directory:
 ```bash
 composer install
 composer test
+composer refactor
 ```
 
 ## Contributing
