@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Http;
-use HireHq\LaravelBankHolidays\Support\BankHolidayFeedClient;
 use HireHq\LaravelBankHolidays\Exceptions\BankHolidayFeedValidationException;
+use HireHq\LaravelBankHolidays\Support\BankHolidayFeedClient;
 use HireHq\LaravelBankHolidays\Support\BankHolidayFeedValidator;
+use Illuminate\Support\Facades\Http;
 
 arch('only the feed client talks to http')
     ->expect('HireHq\LaravelBankHolidays\Support')

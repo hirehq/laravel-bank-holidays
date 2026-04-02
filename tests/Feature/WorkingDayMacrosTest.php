@@ -166,7 +166,7 @@ test('ignores custom feed urls and always requests the gov uk endpoint', functio
 
     CarbonImmutable::parse('2025-05-27')->isWorkingDay();
 
-    Http::assertSent(fn($request) => $request->url() === 'https://www.gov.uk/bank-holidays.json');
+    Http::assertSent(fn ($request) => $request->url() === 'https://www.gov.uk/bank-holidays.json');
 });
 
 test('rejects invalid feed payloads when there is no known good cache', function () {
