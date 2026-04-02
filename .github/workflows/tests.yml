@@ -22,10 +22,10 @@ jobs:
       - name: Install dependencies
         uses: ramsey/composer-install@v3
         with:
-          working-directory: packages/hirehq/laravel-bank-holidays
+          working-directory: ./
 
       - name: Run lint
-        working-directory: packages/hirehq/laravel-bank-holidays
+        working-directory: ./
         run: composer lint
 
   tests:
@@ -77,15 +77,15 @@ jobs:
           tools: composer:v2
 
       - name: Update test matrix dependencies
-        working-directory: packages/hirehq/laravel-bank-holidays
+        working-directory: ./
         run: composer require --no-interaction --no-update "illuminate/http:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
 
       - name: Install dependencies
         uses: ramsey/composer-install@v3
         with:
           dependency-versions: prefer-stable
-          working-directory: packages/hirehq/laravel-bank-holidays
+          working-directory: ./
 
       - name: Run tests
-        working-directory: packages/hirehq/laravel-bank-holidays
+        working-directory: ./
         run: composer test
