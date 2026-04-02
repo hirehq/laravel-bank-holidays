@@ -69,6 +69,17 @@ final class UkBankHolidayCalendar
         return $candidate;
     }
 
+    private function shiftWorkingDays(CarbonInterface $date, int $days, int $direction): CarbonInterface
+    {
+        $candidate = $date;
+
+        for ($step = 0; $step < $days; $step++) {
+            $candidate = $this->shiftWorkingDay($candidate, $direction);
+        }
+
+        return $candidate;
+    }
+
     private function bankHolidays(string $division): array
     {
         if (array_key_exists($division, $this->bankHolidaysByDivision)) {
