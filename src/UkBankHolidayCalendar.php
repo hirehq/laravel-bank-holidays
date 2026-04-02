@@ -25,9 +25,19 @@ final class UkBankHolidayCalendar
         return $this->shiftWorkingDay($date, 1);
     }
 
+    public function addWorkingDays(CarbonInterface $date, int $days = 1): CarbonInterface
+    {
+        return $this->shiftWorkingDays($date, $days, 1);
+    }
+
     public function subWorkingDay(CarbonInterface $date): CarbonInterface
     {
         return $this->shiftWorkingDay($date, -1);
+    }
+
+    public function subWorkingDays(CarbonInterface $date, int $days = 1): CarbonInterface
+    {
+        return $this->shiftWorkingDays($date, $days, -1);
     }
 
     public function isWorkingDay(CarbonInterface $date): bool
