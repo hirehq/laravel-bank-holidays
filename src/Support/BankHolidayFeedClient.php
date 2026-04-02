@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 final class BankHolidayFeedClient
 {
-    private const string FEED_URL = 'https://www.gov.uk/bank-holidays.json';
+    private const FEED_URL = 'https://www.gov.uk/bank-holidays.json';
 
-    private const int MAX_FEED_BYTES = 262144;
+    private const MAX_FEED_BYTES = 262144;
 
     /**
      * @return array<mixed>
