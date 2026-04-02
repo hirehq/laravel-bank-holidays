@@ -46,6 +46,22 @@ test('add working day skips weekends and bank holidays', function () {
     expect($date->addWorkingDay()->toDateString())->toBe('2025-05-27');
 });
 
+test('add working days skips weekends and bank holidays for each day added', function () {
+    Http::fake([
+        'https://www.gov.uk/bank-holidays.json' => Http::response(bankHolidayFeed([
+            'england-and-wales' => [
+                'events' => [
+                    ['date' => '2025-05-26'],
+                ],
+            ],
+        ]), 200, ['Content-Type' => 'application/json']),
+    ]);
+
+    $date = CarbonImmutable::parse('2025-05-23');
+
+    expect($date->addWorkingDays(2)->toDateString())->toBe('2025-05-28');
+});
+
 test('sub working day skips weekends and bank holidays', function () {
     Http::fake([
         'https://www.gov.uk/bank-holidays.json' => Http::response(bankHolidayFeed([
@@ -60,6 +76,22 @@ test('sub working day skips weekends and bank holidays', function () {
     $date = CarbonImmutable::parse('2025-05-27');
 
     expect($date->subWorkingDay()->toDateString())->toBe('2025-05-23');
+});
+
+test('sub working days skips weekends and bank holidays for each day subtracted', function () {
+    Http::fake([
+        'https://www.gov.uk/bank-holidays.json' => Http::response(bankHolidayFeed([
+            'england-and-wales' => [
+                'events' => [
+                    ['date' => '2025-05-26'],
+                ],
+            ],
+        ]), 200, ['Content-Type' => 'application/json']),
+    ]);
+
+    $date = CarbonImmutable::parse('2025-05-28');
+
+    expect($date->subWorkingDays(2)->toDateString())->toBe('2025-05-23');
 });
 
 test('configured division controls which holidays are skipped', function () {
