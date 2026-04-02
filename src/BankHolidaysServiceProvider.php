@@ -36,8 +36,12 @@ final class BankHolidaysServiceProvider extends ServiceProvider
     {
         foreach ([Carbon::class, CarbonImmutable::class] as $dateClass) {
             $dateClass::macro('addWorkingDay', fn () => resolve(UkBankHolidayCalendar::class)->addWorkingDay($this));
+            
+            $dateClass::macro('addWorkingDays', fn (int $days) => resolve(UkBankHolidayCalendar::class)->addWorkingDays($this, $days));
 
             $dateClass::macro('subWorkingDay', fn () => resolve(UkBankHolidayCalendar::class)->subWorkingDay($this));
+            
+            $dateClass::macro('subWorkingDays', fn (int $days) => resolve(UkBankHolidayCalendar::class)->subWorkingDays($this, $days));
 
             $dateClass::macro('isWorkingDay', fn () => resolve(UkBankHolidayCalendar::class)->isWorkingDay($this));
 
