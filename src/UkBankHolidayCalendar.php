@@ -117,7 +117,7 @@ final class UkBankHolidayCalendar
                 return $staleFeed;
             }
 
-            throw new BankHolidayFeedException('Unable to retrieve a valid UK bank holiday feed.', previous: $exception);
+            throw new BankHolidayFeedException('Unable to retrieve a valid UK bank holiday feed.', $exception->getCode(), previous: $exception);
         }
     }
 
