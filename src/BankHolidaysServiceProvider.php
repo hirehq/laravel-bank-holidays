@@ -35,29 +35,17 @@ final class BankHolidaysServiceProvider extends ServiceProvider
     private function registerDateMacros(): void
     {
         foreach ([Carbon::class, CarbonImmutable::class] as $dateClass) {
-            $dateClass::macro('addWorkingDay', function () {
-                return app(UkBankHolidayCalendar::class)->addWorkingDay($this);
-            });
+            $dateClass::macro('addWorkingDay', fn() => resolve(UkBankHolidayCalendar::class)->addWorkingDay($this));
 
-            $dateClass::macro('subWorkingDay', function () {
-                return app(UkBankHolidayCalendar::class)->subWorkingDay($this);
-            });
+            $dateClass::macro('subWorkingDay', fn() => resolve(UkBankHolidayCalendar::class)->subWorkingDay($this));
 
-            $dateClass::macro('isWorkingDay', function () {
-                return app(UkBankHolidayCalendar::class)->isWorkingDay($this);
-            });
+            $dateClass::macro('isWorkingDay', fn() => resolve(UkBankHolidayCalendar::class)->isWorkingDay($this));
 
-            $dateClass::macro('isNotWorkingDay', function () {
-                return app(UkBankHolidayCalendar::class)->isNotWorkingDay($this);
-            });
+            $dateClass::macro('isNotWorkingDay', fn() => resolve(UkBankHolidayCalendar::class)->isNotWorkingDay($this));
 
-            $dateClass::macro('isBankHoliday', function () {
-                return app(UkBankHolidayCalendar::class)->isBankHoliday($this);
-            });
+            $dateClass::macro('isBankHoliday', fn() => resolve(UkBankHolidayCalendar::class)->isBankHoliday($this));
 
-            $dateClass::macro('isNotBankHoliday', function () {
-                return app(UkBankHolidayCalendar::class)->isNotBankHoliday($this);
-            });
+            $dateClass::macro('isNotBankHoliday', fn() => resolve(UkBankHolidayCalendar::class)->isNotBankHoliday($this));
         }
     }
 }
