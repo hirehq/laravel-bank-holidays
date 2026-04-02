@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -20,9 +20,8 @@ jobs:
           tools: composer:v2
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
-        with:
-          working-directory: ./
+        working-directory: ./
+        run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: Run lint
         working-directory: ./
@@ -67,7 +66,7 @@ jobs:
             php: '8.5'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -81,10 +80,8 @@ jobs:
         run: composer require --no-interaction --no-update "illuminate/http:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}"
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v3
-        with:
-          dependency-versions: prefer-stable
-          working-directory: ./
+        working-directory: ./
+        run: composer update --prefer-stable --prefer-dist --no-interaction --no-progress
 
       - name: Run tests
         working-directory: ./
