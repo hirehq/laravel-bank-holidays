@@ -13,7 +13,7 @@ use Throwable;
 
 final class UkBankHolidayCalendar
 {
-    private const array DIVISIONS = [
+    private const DIVISIONS = [
         'england-and-wales',
         'scotland',
         'northern-ireland',
