@@ -4,6 +4,12 @@ namespace HireHq\LaravelBankHolidays\Support;
 
 final class BankHolidayConfig
 {
+    public const DIVISIONS = [
+        'england-and-wales',
+        'scotland',
+        'northern-ireland',
+    ];
+
     public static function cacheKey(): string
     {
         return 'uk-bank-holidays.feed';

@@ -8,12 +8,6 @@ use Throwable;
 
 final class BankHolidayFeedValidator
 {
-    private const array DIVISIONS = [
-        'england-and-wales',
-        'scotland',
-        'northern-ireland',
-    ];
-
     /**
      * @param  array<mixed>  $feed
      * @return array<string, array{division: string, events: array<int, array{date: string}>}>
@@ -22,7 +16,7 @@ final class BankHolidayFeedValidator
     {
         $validatedFeed = [];
 
-        foreach (self::DIVISIONS as $division) {
+        foreach (BankHolidayConfig::DIVISIONS as $division) {
             $payload = $feed[$division] ?? null;
 
             if (! is_array($payload)) {

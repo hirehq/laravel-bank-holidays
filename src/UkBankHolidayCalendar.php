@@ -13,12 +13,6 @@ use Throwable;
 
 final class UkBankHolidayCalendar
 {
-    private const DIVISIONS = [
-        'england-and-wales',
-        'scotland',
-        'northern-ireland',
-    ];
-
     private array $bankHolidaysByDivision = [];
 
     public function __construct(
@@ -125,7 +119,7 @@ final class UkBankHolidayCalendar
     {
         $division = BankHolidayConfig::division();
 
-        if (! in_array($division, self::DIVISIONS, true)) {
+        if (! in_array($division, BankHolidayConfig::DIVISIONS, true)) {
             throw new InvalidArgumentException('The configured UK bank holiday division is invalid.');
         }
 
